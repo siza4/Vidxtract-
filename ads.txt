@@ -1,1 +1,1 @@
-# Placeholder ads.txt - add your AdSense/Ad exchange entries here when ready
+google.com, ca-pub-3210024369227152, DIRECT, f08c47fec0942fa0
