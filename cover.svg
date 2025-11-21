@@ -1,0 +1,22 @@
+<svg width="1400" height="700" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="neonGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#190019"/>
+      <stop offset="100%" stop-color="#32004d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1400" height="700" fill="url(#neonGrad)"/>
+
+  <text x="50%" y="40%" font-size="90" fill="#e0b0ff" text-anchor="middle" font-family="Arial Black">
+    VidXtract
+  </text>
+
+  <text x="50%" y="55%" font-size="42" fill="#b388ff" text-anchor="middle" font-family="Arial">
+    Neon Video Downloader UI • GitHub Pages • Multi-Platform
+  </text>
+
+  <text x="50%" y="70%" font-size="32" fill="#d3a3ff" text-anchor="middle">
+    Facebook • TikTok • Instagram • YouTube • X(Twitter)
+  </text>
+</svg>
