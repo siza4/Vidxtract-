@@ -3,18 +3,23 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>VidXtract — All-in-one (Neon)</title>
+  <title>Selakw Xtract — All-in-one Video Downloader</title>
   <link rel="stylesheet" href="style.css">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="logo.svg">
+  <meta name="theme-color" content="#07020a">
 </head>
 <body data-theme="dark">
+  <!-- VANTA will be placed in #vanta (z-index -1) -->
+  <div id="vanta-bg" aria-hidden="true"></div>
+
   <!-- Drawer -->
   <div id="drawer" class="drawer" aria-hidden="false">
     <div class="drawer-header">
-      <div class="logo">Vx</div>
+      <div class="logo-wrap">
+        <img src="logo.svg" alt="Selakw Xtract logo" class="logo-img">
+      </div>
       <div>
-        <div class="appname">VidXtract</div>
+        <div class="appname">Selakw Xtract</div>
         <div class="muted small">All-in-one downloader</div>
       </div>
     </div>
@@ -28,39 +33,42 @@
       <button data-page="privacy">Privacy Policy</button>
       <button data-page="terms">Terms & Conditions</button>
       <button data-page="disclaimer">Disclaimer</button>
+      <button data-page="cookies">Cookies</button>
+      <button data-page="gdpr">GDPR Notice</button>
       <button data-page="contact">Contact</button>
     </nav>
 
     <div class="drawer-foot">
       <div class="muted small">Contact: <a href="mailto:akachrizzney@gmail.com">akachrizzney@gmail.com</a></div>
-      <div class="muted small">© 2025 VidXtract</div>
+      <div class="muted small">© <span id="year"></span> Selakw Xtract</div>
     </div>
   </div>
 
   <!-- Topbar -->
   <header class="topbar">
     <div class="brand">
-      <div id="hamb" class="logo">Vx</div>
+      <div id="hamb" class="logo-btn" aria-label="menu">SX</div>
       <div>
-        <div class="title">VidXtract</div>
+        <div class="title">Selakw Xtract</div>
         <div class="muted small">Download videos — fast & free</div>
       </div>
     </div>
 
     <div class="controls">
-      <button id="themeBtn" class="icon-btn">Theme</button>
+      <button id="themeBtn" class="icon-btn" aria-pressed="false">Theme</button>
     </div>
   </header>
 
   <!-- Main -->
-  <main class="wrap">
-    <section id="home" class="card">
+  <main class="wrap" id="app">
+    <!-- HOME -->
+    <section id="home" class="card page">
       <div class="hero">
         <div class="hero-left">
-          <h1 class="hero-title">VidXtract — All Platforms</h1>
-          <p class="muted">Paste a public video/reel/short URL (Facebook, TikTok, Instagram, YouTube, X) and choose a format.</p>
+          <h1 class="hero-title">Selakw Xtract</h1>
+          <p class="muted">Paste a public video URL (Facebook, TikTok, Instagram, YouTube, X/Twitter) and download MP4/WEBM/MP3 when available.</p>
 
-          <input id="url" class="input" placeholder="Paste video URL (FB / TikTok / IG / YouTube / X)" autocomplete="off">
+          <input id="url" class="input" placeholder="Paste video URL (FB / TikTok / IG / YouTube / X)" autocomplete="off" />
 
           <div class="row">
             <button id="resolve" class="btn btn-primary">Resolve</button>
@@ -68,10 +76,10 @@
             <select id="quality" class="quality"><option value="auto">Auto (best)</option></select>
           </div>
 
-          <div id="detected" class="muted" style="margin-top:10px"></div>
+          <div id="detected" class="muted small" style="margin-top:10px"></div>
 
           <div id="previewArea" class="preview" style="display:none">
-            <img id="thumbImg" class="thumb" src="" alt="thumb">
+            <img id="thumbImg" class="thumb" src="" alt="thumbnail">
             <div>
               <div id="titleText" class="meta">Title</div>
               <div id="durationText" class="muted small"></div>
@@ -93,32 +101,30 @@
               <div class="muted small">Neon • GitHub ready</div>
             </div>
             <ul class="muted" style="margin-top:10px;padding-left:16px">
-              <li>Multi-resolver (Snapsave, TT, YT fallback, Tw)</li>
-              <li>Rewarded ad unlock</li>
+              <li>Multi-resolver strategy (Snapsave, TikTok, Twitter, YouTube fallbacks)</li>
+              <li>Rewarded ad unlock + fake progress</li>
               <li>History (localStorage)</li>
             </ul>
           </div>
 
           <div class="card small-block" style="margin-top:12px">
             <div style="font-weight:700;margin-bottom:8px">Supported</div>
-            <div class="platforms">
-              <div class="pl-item">Facebook</div>
-              <div class="pl-item">YouTube</div>
-              <div class="pl-item">TikTok</div>
-              <div class="pl-item">Instagram</div>
-              <div class="pl-item">X / Twitter</div>
+            <div class="platforms muted">
+              Facebook · YouTube · TikTok · Instagram · X
             </div>
           </div>
         </aside>
       </div>
     </section>
 
-    <section id="downloader" class="card" style="display:none">
+    <!-- DOWNLOADER (duplicate access) -->
+    <section id="downloader" class="card page" style="display:none">
       <h2>Downloader</h2>
-      <p class="muted">Same tools as home — paste and use controls above.</p>
+      <p class="muted">Use the controls on the home page to paste your link and download.</p>
     </section>
 
-    <section id="history" class="card" style="display:none">
+    <!-- HISTORY -->
+    <section id="history" class="card page" style="display:none">
       <div style="display:flex;justify-content:space-between;align-items:center">
         <div style="font-weight:700">Download History</div>
         <div><button id="clearHistory" class="btn-ghost smallbtn">Clear</button></div>
@@ -126,11 +132,41 @@
       <div class="history-list" id="historyList"></div>
     </section>
 
-    <section id="about" class="card" style="display:none"><h2>About</h2><p class="muted">VidXtract — multi-resolver frontend. Use responsibly.</p></section>
-    <section id="privacy" class="card" style="display:none"><h2>Privacy Policy</h2><p class="muted">Contact: <a href="mailto:akachrizzney@gmail.com">akachrizzney@gmail.com</a></p></section>
-    <section id="terms" class="card" style="display:none"><h2>Terms</h2><p class="muted">Respect copyright laws.</p></section>
-    <section id="disclaimer" class="card" style="display:none"><h2>Disclaimer</h2><p class="muted">Not affiliated with platforms.</p></section>
-    <section id="contact" class="card" style="display:none"><h2>Contact</h2><p class="muted">Email: <a href="mailto:akachrizzney@gmail.com">akachrizzney@gmail.com</a></p></section>
+    <!-- About & policy pages -->
+    <section id="about" class="card page" style="display:none">
+      <h2>About Selakw Xtract</h2>
+      <p class="muted">Selakw Xtract is a front-end multi-resolver downloader UI. Use responsibly and respect copyright.</p>
+    </section>
+
+    <section id="privacy" class="card page" style="display:none">
+      <h2>Privacy Policy</h2>
+      <p class="muted">We do not store personal accounts. Contact: <a href="mailto:akachrizzney@gmail.com">akachrizzney@gmail.com</a></p>
+    </section>
+
+    <section id="terms" class="card page" style="display:none">
+      <h2>Terms & Conditions</h2>
+      <p class="muted">Users are responsible for ensuring download rights. No piracy endorsed.</p>
+    </section>
+
+    <section id="disclaimer" class="card page" style="display:none">
+      <h2>Disclaimer</h2>
+      <p class="muted">Not affiliated with any platform. Use at your own risk.</p>
+    </section>
+
+    <section id="cookies" class="card page" style="display:none">
+      <h2>Cookies Notice</h2>
+      <p class="muted">Third party resolvers/ads may use cookies. Clear cookies in browser settings.</p>
+    </section>
+
+    <section id="gdpr" class="card page" style="display:none">
+      <h2>GDPR Notice</h2>
+      <p class="muted">EEA residents may contact the site email for data requests.</p>
+    </section>
+
+    <section id="contact" class="card page" style="display:none">
+      <h2>Contact</h2>
+      <p class="muted">Email: <a href="mailto:akachrizzney@gmail.com">akachrizzney@gmail.com</a></p>
+    </section>
   </main>
 
   <!-- mini player -->
@@ -144,19 +180,18 @@
       <h3>Watch ad to unlock download</h3>
       <video id="rewardVid" class="ad-video" playsinline muted style="width:100%;border-radius:8px"></video>
       <div style="margin-top:10px;display:flex;justify-content:center;gap:8px">
-        <div class="muted small" id="rewardCountdown">10</div>
+        <div class="muted small" id="rewardCountdown">8</div>
         <button id="skipAd" class="btn-ghost smallbtn" disabled>Skip</button>
         <button id="cancelAd" class="btn-ghost smallbtn">Cancel</button>
       </div>
     </div>
   </div>
 
-  <footer class="footer">© 2025 VidXtract • Contact: <a href="mailto:akachrizzney@gmail.com">akachrizzney@gmail.com</a></footer>
+  <footer class="footer">© <span id="year2"></span> Selakw Xtract • Contact: <a href="mailto:akachrizzney@gmail.com">akachrizzney@gmail.com</a></footer>
 
-  <!-- Vanta -->
+  <!-- scripts -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.waves.min.js"></script>
-
   <script src="script.js"></script>
 </body>
 </html>
