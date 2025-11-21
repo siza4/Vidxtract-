@@ -25,3 +25,5 @@ Floating mini-player
 Dark/Light theme switch
 
 Works on GitHub Pages
+
+[![Deploy to GitHub Pages](https://img.shields.io/badge/Deploy-GitHub%20Pages-blue?logo=github)](https://docs.github.com/en/pages/quickstart)
