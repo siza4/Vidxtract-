@@ -1,22 +1,17 @@
-<svg width="300" height="300" xmlns="http://www.w3.org/2000/svg">
+<svg width="256" height="256" viewBox="0 0 256 256" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <radialGradient id="pulse" cx="50%" cy="50%" r="75%">
-      <stop offset="0%" stop-color="#a855f7"/>
-      <stop offset="100%" stop-color="#4c1d95"/>
-    </radialGradient>
+    <linearGradient id="g1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#a24bff"/>
+      <stop offset="100%" stop-color="#ff67b4"/>
+    </linearGradient>
     <filter id="glow">
-      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
-      <feMerge>
-        <feMergeNode in="coloredBlur"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
+      <feGaussianBlur stdDeviation="8" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-
-  <circle cx="150" cy="150" r="110" fill="url(#pulse)" filter="url(#glow)"/>
-
-  <polygon points="125,100 220,150 125,200" fill="white" filter="url(#glow)"/>
-  <text x="50%" y="92%" fill="#ffffff" font-size="40" text-anchor="middle" font-family="Arial Black">
-    VX
-  </text>
+  <rect width="256" height="256" rx="36" fill="url(#g1)" />
+  <g transform="translate(48,40)" fill="#fff" filter="url(#glow)">
+    <path d="M24 32 L104 32 L72 96 L24 32Z" opacity="0.98"/>
+    <text x="20" y="150" font-family="Arial" font-size="72" fill="#fff" font-weight="700">SX</text>
+  </g>
 </svg>
